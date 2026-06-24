@@ -75,15 +75,34 @@
 
   .nav-links a:hover { color: var(--accent); }
 
-  /* HERO */
+  /* HERO — full width override */
   .hero {
     min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding: 120px 40px 80px;
     position: relative;
     overflow: hidden;
+    max-width: 100%;
+  }
+
+  /* PROJECTS — full-bleed background with inner max-width */
+  .projects-section {
+    background: var(--bg2);
+    max-width: 100%;
+    padding: 100px 40px;
+  }
+
+  .projects-section > * {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .projects-section .projects-grid {
+    max-width: 1100px;
   }
 
   .hero::before {
@@ -706,15 +725,177 @@
     transform: translateY(0);
   }
 
-  @media (max-width: 768px) {
-    nav { padding: 16px 20px; }
-    .nav-links { display: none; }
+  /* ── RESPONSIVE SYSTEM ── */
+
+  /* Large desktop: 1400px+ */
+  @media (min-width: 1400px) {
+    .hero-grid { max-width: 1300px; }
+    section { max-width: 1300px; }
+    .stats-inner { max-width: 1300px; }
+    .stat-num { font-size: 48px; }
+  }
+
+  /* Desktop: 1024px–1399px — default styles handle this */
+
+  /* Small laptop / large tablet landscape: 768px–1023px */
+  @media (max-width: 1023px) {
+    nav { padding: 16px 24px; }
+    .nav-links { gap: 20px; }
+    .hero { padding: 110px 32px 70px; }
+    section { padding: 80px 32px; }
+    .projects-section { padding: 80px 32px; }
+    .stats-bar { padding: 0 32px; }
+    .stats-inner { grid-template-columns: repeat(4, 1fr); }
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .terminal-block { max-width: 100%; }
+    .ai-section { padding: 28px; }
+  }
+
+  /* Tablet portrait: 600px–767px */
+  @media (max-width: 767px) {
+    nav { padding: 14px 20px; }
+    .nav-links { gap: 16px; }
+    .nav-links a { font-size: 11px; }
     .hero { padding: 100px 20px 60px; }
-    section { padding: 60px 20px; }
+    section { padding: 64px 20px; }
+    .projects-section { padding: 64px 20px; }
+    .stats-bar { padding: 0 20px; }
     .stats-inner { grid-template-columns: repeat(2, 1fr); }
-    .stat { border-right: none; border-bottom: 1px solid var(--border); }
-    .exp-header { grid-template-columns: 1fr; }
-    .contact-section { padding: 60px 20px; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); padding: 28px 16px; }
+    .stat:nth-child(odd) { border-right: 1px solid var(--border); }
+    .stat:last-child { border-bottom: none; }
+    .stat-num { font-size: 32px; }
+    .exp-header { grid-template-columns: 1fr; gap: 4px; }
+    .exp-date { margin-top: 0; }
+    .exp-header { padding: 20px; }
+    .exp-body { padding: 0 20px 20px; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .contact-section { padding: 64px 20px; }
+    .contact-cards { grid-template-columns: 1fr; max-width: 360px; margin-left: auto; margin-right: auto; }
+    .ai-section { padding: 24px 20px; }
+    .terminal-block { max-width: 100%; }
+    .section-title { margin-bottom: 40px; }
+  }
+
+  /* Mobile: up to 599px */
+  @media (max-width: 599px) {
+    /* Nav: hide text links, show hamburger menu */
+    .nav-links { display: none; }
+    .nav-hamburger { display: flex; }
+    nav { padding: 14px 16px; }
+
+    .hero { padding: 90px 16px 52px; min-height: 100svh; }
+    h1 { font-size: clamp(36px, 11vw, 52px); }
+
+    section { padding: 52px 16px; }
+    .projects-section { padding: 52px 16px; }
+    .stats-bar { padding: 0 16px; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat { padding: 24px 12px; }
+    .stat-num { font-size: 28px; }
+    .stat-label { font-size: 10px; }
+
+    .exp-header { padding: 16px; }
+    .exp-body { padding: 0 16px 16px; }
+    .exp-role { font-size: 14px; }
+    .exp-body li { font-size: 13px; }
+
+    .project-card { padding: 20px; }
+    .project-name { font-size: 15px; }
+    .projects-grid { grid-template-columns: 1fr; gap: 12px; }
+
+    .skills-grid { grid-template-columns: 1fr; gap: 10px; }
+    .skill-group { padding: 20px; }
+
+    .contact-section { padding: 52px 16px; }
+    .contact-cards { grid-template-columns: 1fr; max-width: 100%; gap: 12px; }
+    .contact-card { padding: 20px 16px; flex-direction: row; gap: 16px; text-align: left; align-items: center; }
+    .contact-card-icon { flex-shrink: 0; }
+    .contact-heading { font-size: clamp(26px, 7vw, 40px); }
+    .contact-sub { font-size: 12px; margin-bottom: 32px; }
+
+    .ai-section { padding: 20px 16px; }
+    .ai-tools { gap: 8px; }
+    .ai-tool { font-size: 11px; padding: 6px 12px; }
+
+    .terminal-body { font-size: 11px; padding: 14px; line-height: 1.9; }
+    .hero-tags { gap: 8px; }
+    .tag { font-size: 10px; padding: 5px 10px; }
+
+    footer { padding: 20px 16px; font-size: 10px; }
+    .section-title { margin-bottom: 32px; }
+    .ticker-item { font-size: 10px; padding: 0 16px; }
+  }
+
+  /* Very small phones: up to 360px */
+  @media (max-width: 360px) {
+    .hero { padding: 80px 12px 48px; }
+    section { padding: 44px 12px; }
+    .stats-bar { padding: 0 12px; }
+    .stat-num { font-size: 24px; }
+    .terminal-body { font-size: 10px; }
+    h1 { font-size: clamp(30px, 10vw, 44px); }
+  }
+
+  /* Hamburger menu styles */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 22px;
+    height: 1.5px;
+    background: var(--text-muted);
+    transition: all 0.3s;
+  }
+
+  /* Mobile nav drawer */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(10,14,20,0.97);
+    z-index: 99;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+  .mobile-nav.open { display: flex; }
+  .mobile-nav a {
+    font-family: var(--mono);
+    font-size: 20px;
+    color: var(--text-dim);
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    transition: color 0.2s;
+  }
+  .mobile-nav a:hover { color: var(--accent); }
+  .mobile-nav-close {
+    position: absolute;
+    top: 20px; right: 20px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  /* Wide ultrawide: 1920px+ */
+  @media (min-width: 1920px) {
+    body { font-size: 16px; }
+    .hero-grid { max-width: 1400px; }
+    section { max-width: 1400px; }
+    .stats-inner { max-width: 1400px; }
   }
 </style>
 </head>
@@ -722,19 +903,31 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">SYSTEMS & INFRASTRUCTURE ENGINEER</div>
+  <div class="nav-logo">arun_kumar.sys</div>
   <ul class="nav-links">
     <li><a href="#experience" onclick="scrollTo('experience')">Experience</a></li>
     <li><a href="#projects" onclick="scrollTo('projects')">Projects</a></li>
     <li><a href="#skills" onclick="scrollTo('skills')">Skills</a></li>
     <li><a href="#contact" onclick="scrollTo('contact')">Contact</a></li>
   </ul>
+  <button class="nav-hamburger" onclick="document.getElementById('mobileNav').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
 
+<!-- MOBILE NAV DRAWER -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="document.getElementById('mobileNav').classList.remove('open')">&times;</button>
+  <a href="#experience" onclick="document.getElementById('mobileNav').classList.remove('open'); scrollTo('experience')">Experience</a>
+  <a href="#projects" onclick="document.getElementById('mobileNav').classList.remove('open'); scrollTo('projects')">Projects</a>
+  <a href="#skills" onclick="document.getElementById('mobileNav').classList.remove('open'); scrollTo('skills')">Skills</a>
+  <a href="#contact" onclick="document.getElementById('mobileNav').classList.remove('open'); scrollTo('contact')">Contact</a>
+</div>
+
 <!-- HERO -->
-<section class="hero" style="max-width:100%; padding-left:40px; padding-right:40px;">
+<section class="hero">
   <div class="hero-grid">
-    <!--<div class="hero-eyebrow">Systems & Infrastructure Engineer</div>-->
+    <div class="hero-eyebrow">Systems & Infrastructure Engineer</div>
     <h1>Arun<br><span>Kumar</span></h1>
 
     <div class="terminal-block">
@@ -895,8 +1088,7 @@
 </section>
 
 <!-- PROJECTS -->
-<section id="projects" style="background:var(--bg2);max-width:100%;padding-left:40px;padding-right:40px;">
-  <div style="max-width:1100px;margin:0 auto;">
+<section id="projects" class="projects-section">
     <div class="section-label">Engineering Work</div>
     <div class="section-title">Technical <strong>Projects</strong></div>
 
@@ -959,7 +1151,6 @@
         </div>
       </div>
     </div>
-  </div>
 </section>
 
 <!-- SKILLS -->
